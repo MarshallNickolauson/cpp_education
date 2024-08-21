@@ -4,7 +4,8 @@
 #include <iomanip>
 #include <cstdlib>
 
-// g++ -o quicksort quicksort.cpp
+// UNOPTIMIZED - Stack overflow past 9999 elements
+// Quicksort for 9999 elements: 0.10278 seconds 
 
 int partition(int array[], int start, int end);
 void quicksort(int array[], int start, int end);
@@ -13,7 +14,7 @@ int main() {
 
     srand(time(NULL));
 
-    int size = 100000;
+    int size = 9999;
     int array[size];
 
     // Fill the first half with random numbers
