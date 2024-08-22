@@ -15,7 +15,7 @@ public:
     LinkedList() : head(nullptr) {}     // Constructor initializes head to nullptr
 
     // Insert new node at the beginning
-    void insertAtBeginning(int value)
+    void insertFront(int value)
     {
         Node* newNode = new Node();     // Create a new node
         newNode->data = value;          // Set the node's data
@@ -24,7 +24,7 @@ public:
     }
 
     // Insert new node at the end
-    void insertAtEnd(int value)
+    void insertEnd(int value)
     {
         Node* newNode = new Node();
         newNode->data = value;
@@ -79,13 +79,13 @@ int main()
 
     LinkedList list;
 
-    list.insertAtBeginning(10);
-    list.insertAtBeginning(20);
-    list.insertAtBeginning(30);
+    list.insertFront(10);
+    list.insertFront(20);
+    list.insertFront(30);
 
-    list.insertAtEnd(40);
-    list.insertAtEnd(50);
-    list.insertAtEnd(60);
+    list.insertEnd(40);
+    list.insertEnd(50);
+    list.insertEnd(60);
 
     list.find(40);
 

@@ -6,16 +6,16 @@ struct Node {
     Node *next;
 };
 
-class LinkedList {
+class DoublyLinkedList {
 private:
     Node *head;
 
 public:
-    LinkedList() {
+    DoublyLinkedList() {
         head = nullptr;
     }
 
-    void insertAtBeginning(int value) {
+    void insertFront(int value) {
         Node *newNode = new Node();
         newNode->data = value;
         newNode->next = nullptr;
@@ -23,7 +23,7 @@ public:
         head = newNode;
     }
 
-    void insertAtEnd(int value) {
+    void insertEnd(int value) {
         Node *newNode = new Node();
         newNode->data = value;
         newNode->next = nullptr;
@@ -38,6 +38,14 @@ public:
             current->next = newNode;
             newNode->prev = current;
         }
+    }
+
+    void deleteFront() {
+        if (head != nullptr) {
+            Node *currentHead = head;
+            head = currentHead->next;
+            delete currentHead;
+        } 
     }
 
     void find(int value) {
@@ -66,20 +74,29 @@ public:
 int main()
 {
 
-    LinkedList list;
+    DoublyLinkedList list;
 
-    list.insertAtBeginning(10);
-    list.insertAtBeginning(20);
-    list.insertAtBeginning(30);
+    list.insertFront(10);
+    list.insertFront(20);
+    list.insertFront(30);
 
-    list.insertAtEnd(10);
-    list.insertAtEnd(20);
-    list.insertAtEnd(30);
+    list.insertEnd(10);
+    list.insertEnd(20);
+    list.insertEnd(30);
+
+    std::cout << std::endl;
+    std::cout << "Doubly Linked List: ";
+    list.printList();
+
+    list.deleteFront();
+    list.deleteFront();
+    list.deleteFront();
 
     list.find(20);
 
     std::cout << "Doubly Linked List: ";
     list.printList();
+    std::cout << std::endl;
 
     return 0;
 }
