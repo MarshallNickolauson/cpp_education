@@ -45,7 +45,7 @@ public:
         }
     }
 
-    void searchFor(int value)
+    void find(int value)
     {
         Node* current = head;
         while(current != nullptr)
@@ -87,7 +87,7 @@ int main()
     list.insertAtEnd(50);
     list.insertAtEnd(60);
 
-    list.searchFor(40);
+    list.find(40);
 
     std::cout << "Linked List: ";
     list.printList();
