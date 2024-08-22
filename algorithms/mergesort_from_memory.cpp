@@ -1,40 +1,41 @@
 #include <iostream>
 
-using namespace std;
-
-void mergeSort(int array[], int start, int end);
+void mergesort(int array[], int start, int end);
 void merge(int array[], int start, int mid, int end);
+
+using namespace std;
 
 int main() {
 
-    int array[] = {8, 5, 9, 3, 6, 2, 10, 1, 4, 7, 22, 35, 12};
+    int array[] = {10, 12, 4, 7, 2, 4, 9, 17, 3, 55, 2, 8, 72};
     int size = sizeof(array)/sizeof(array[0]);
 
-    mergeSort(array, 0, size - 1);
+    mergesort(array, 0, size - 1);
 
     for(int i : array) {
         cout << i << ' ';
     }
-    cout << endl;
+
+    return 0;
 }
 
-void mergeSort(int array[], int start, int end) {
+void mergesort(int array[], int start, int end) {
     if(start < end) {
         int mid = (end - start) / 2 + start;
-        mergeSort(array, start, mid);
-        mergeSort(array, mid + 1, end);
+        mergesort(array, start, mid);
+        mergesort(array, mid + 1, end);
         merge(array, start, mid, end);
     }
 }
 
 void merge(int array[], int start, int mid, int end) {
-    //left and right sizes
+    //left and right array sizes
     int leftSize = mid - start + 1;
     int rightSize = end - mid;
 
-    //init left and right arrays
+    //left and right array init
     int leftArray[leftSize], rightArray[rightSize];
-    
+
     //populate arrays
     for(int i = 0; i < leftSize; i++) {
         leftArray[i] = array[start + i];
@@ -44,10 +45,10 @@ void merge(int array[], int start, int mid, int end) {
         rightArray[i] = array[mid + 1 + i];
     }
 
-    //init merge pointers
+    //init pointers
     int i = start, l = 0, r = 0;
 
-    //populate main array with left and right arrays (sorted)
+    //sort and merge with the pointers
     while(l < leftSize && r < rightSize) {
         if(leftArray[l] <= rightArray[r]) {
             array[i++] = leftArray[l++];
@@ -56,7 +57,6 @@ void merge(int array[], int start, int mid, int end) {
         }
     }
 
-    //add leftovers
     while(l < leftSize) {
         array[i++] = leftArray[l++];
     }
@@ -64,4 +64,5 @@ void merge(int array[], int start, int mid, int end) {
     while(r < rightSize) {
         array[i++] = rightArray[r++];
     }
+
 }
