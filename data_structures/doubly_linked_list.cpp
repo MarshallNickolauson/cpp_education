@@ -11,7 +11,9 @@ private:
     Node *head;
 
 public:
-    LinkedList() : head(nullptr) {}
+    LinkedList() {
+        head = nullptr;
+    }
 
     void insertAtBeginning(int value) {
         Node *newNode = new Node();
