@@ -48,6 +48,15 @@ public:
         } 
     }
 
+    void deleteEnd() {
+        Node *current = head;
+        while (current->next != nullptr) {
+            current = current->next;
+        }
+        current->prev->next = nullptr;
+        delete current;
+    }
+
     void find(int value) {
         Node *current = head;
         while (current != nullptr) {
@@ -84,6 +93,8 @@ int main()
     list.insertEnd(20);
     list.insertEnd(30);
 
+    list.insertEnd(420);
+
     std::cout << std::endl;
     std::cout << "Doubly Linked List: ";
     list.printList();
@@ -91,6 +102,8 @@ int main()
     list.deleteFront();
     list.deleteFront();
     list.deleteFront();
+
+    list.deleteEnd();
 
     list.find(20);
 
