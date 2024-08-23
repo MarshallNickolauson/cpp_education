@@ -1,142 +1,97 @@
 #include <iostream>
 
+using namespace std;
+
 struct Node {
     int data;
-    Node *prev;
-    Node *next;
+    Node* prev;
+    Node* next;
+
+    Node(int value) : data(value), prev(nullptr), next(nullptr) {}
 };
 
 class DoublyLinkedList {
 private:
-    Node *head;
-
+    Node* head;
+    Node* tail;
 public:
-    DoublyLinkedList() {
-        head = nullptr;
+    DoublyLinkedList() : head(nullptr) {}
+
+    // ~ is the destructor operator. When "delete list" is called of type DoublyLinkedList, it will properly delete all nodes from heap memory.
+    ~DoublyLinkedList() {
+        Node* current = head;
+        Node* nextNode;
+        cout << endl;
+        while(current != nullptr) {
+            nextNode = current->next;
+            cout << "Deleted Node: " << current << endl;
+            delete current;
+            current = nextNode;
+        }
+        cout << endl;
     }
 
-    void insertFront(int value) {
-        Node *newNode = new Node();
-        newNode->data = value;
-        newNode->next = nullptr;
-        newNode->next = head;
-        head = newNode;
+    // insert at end, find, insert in middle, delete, display functions...
+
+    void addFront(int value) {
+        Node* newNode = new Node(value);
+        cout << "New Node at: " << newNode << " -> " << newNode->data << endl;
+        if(head == nullptr) {
+            head = tail = newNode;
+        } else {
+            newNode->next = head;
+            head->prev = newNode;
+            head = newNode;
+        }
+        //printHeadTail();
     }
 
-    void insertEnd(int value) {
-        Node *newNode = new Node();
-        newNode->data = value;
-        newNode->next = nullptr;
-
-        if (head == nullptr) {
+    void append(int value) {
+        Node* newNode = new Node(value);
+        cout << "New Node at: " << newNode << " -> " << newNode->data << endl;
+        if(head == nullptr) {
             head = newNode;
         } else {
-            Node *current = head;
-            while (current->next != nullptr) {
-                current = current->next;
-            }
-            current->next = newNode;
-            newNode->prev = current;
+            tail->next = newNode;
+            newNode->prev = tail;
+            tail = newNode;
         }
-    }
-
-    void insertAfter(Node *nextNode, int value) {
-        Node *newNode = new Node();
-        newNode->data = value;
-
-        if (head == nullptr) {
-            head = newNode;
-        } else if (nextNode != nullptr) {
-            // Insert the new node after the nextNode
-            newNode->next = nextNode->next;
-            newNode->prev = nextNode;
-
-            if (nextNode->next != nullptr) {
-                nextNode->next->prev = newNode;
-            }
-
-            nextNode->next = newNode;
-        } else {
-            std::cout << "The specified node was not found." << std::endl;
-        }
-    }
-
-    void deleteFront() {
-        if (head != nullptr) {
-            Node *currentHead = head;
-            head = currentHead->next;
-            delete currentHead;
-        } 
-    }
-
-    void deleteEnd() {
-        Node *current = head;
-        while (current->next != nullptr) {
-            current = current->next;
-        }
-        current->prev->next = nullptr;
-        delete current;
-    }
-
-    Node* find(int value) {
-        Node *current = head;
-        while (current != nullptr) {
-            if (current->data == value) {
-                std::cout << value << " Found.\n";
-                return current;
-            }
-
-            current = current->next;
-            std::cout << current << std::endl;
-        }
-        std::cout << value << " Not Found.\n";
-        return nullptr;
+        printHeadTail();
     }
 
     void printList() {
-        Node *current = head;
-        while (current != nullptr) {
-            std::cout << current->data << " -> ";
+        Node* current = head;
+        cout << endl;
+        cout << "Linked List: ";
+        while(current != nullptr) {
+            cout << "|" << current->data << "| -> ";
             current = current->next;
         }
-        std::cout << "nullptr\n";
+        cout << "nullptr" << endl;
+    }
+
+    void printHeadTail() {
+        cout << "Head: " << head->data << endl;
+        cout << "Tail: " << tail->data << endl;
     }
 };
 
-int main()
-{
+int main() {
 
-    DoublyLinkedList list;
+    DoublyLinkedList* linkedList = new DoublyLinkedList();
+    cout << endl;
 
-    list.insertFront(10);
-    list.insertFront(20);
-    list.insertFront(30);
+    linkedList->addFront(1);
+    linkedList->addFront(2);
+    linkedList->addFront(3);
 
-    list.insertEnd(10);
-    list.insertEnd(20);
-    list.insertEnd(30);
+    linkedList->append(420);
+    linkedList->append(421);
+    linkedList->append(422);
 
-    list.insertEnd(420);
+    linkedList->printList();
 
-    std::cout << std::endl;
-    std::cout << "Doubly Linked List: ";
-    list.printList();
-
-    list.deleteFront();
-    list.deleteFront();
-    list.deleteFront();
-
-    Node* foundNode = list.find(420);
-    if (foundNode != nullptr) {
-        list.insertAfter(foundNode, 69);
-        list.insertAfter(foundNode, 69);
-    }
-
-    list.deleteEnd();
-
-    std::cout << "Doubly Linked List: ";
-    list.printList();
-    std::cout << std::endl;
-
+    delete linkedList;
+    
     return 0;
 }
