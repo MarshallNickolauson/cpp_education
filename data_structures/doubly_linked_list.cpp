@@ -66,6 +66,7 @@ public:
             }
 
             current = current->next;
+            std::cout << current << std::endl;
         }
         std::cout << value << " Not Found.\n";
     }
@@ -103,9 +104,9 @@ int main()
     list.deleteFront();
     list.deleteFront();
 
-    list.deleteEnd();
+    list.find(420);
 
-    list.find(20);
+    list.deleteEnd();
 
     std::cout << "Doubly Linked List: ";
     list.printList();
