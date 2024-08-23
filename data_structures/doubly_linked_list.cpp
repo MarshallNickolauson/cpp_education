@@ -40,6 +40,27 @@ public:
         }
     }
 
+    void insertAfter(Node *nextNode, int value) {
+        Node *newNode = new Node();
+        newNode->data = value;
+
+        if (head == nullptr) {
+            head = newNode;
+        } else if (nextNode != nullptr) {
+            // Insert the new node after the nextNode
+            newNode->next = nextNode->next;
+            newNode->prev = nextNode;
+
+            if (nextNode->next != nullptr) {
+                nextNode->next->prev = newNode;
+            }
+
+            nextNode->next = newNode;
+        } else {
+            std::cout << "The specified node was not found." << std::endl;
+        }
+    }
+
     void deleteFront() {
         if (head != nullptr) {
             Node *currentHead = head;
@@ -57,18 +78,19 @@ public:
         delete current;
     }
 
-    void find(int value) {
+    Node* find(int value) {
         Node *current = head;
         while (current != nullptr) {
             if (current->data == value) {
                 std::cout << value << " Found.\n";
-                return;
+                return current;
             }
 
             current = current->next;
             std::cout << current << std::endl;
         }
         std::cout << value << " Not Found.\n";
+        return nullptr;
     }
 
     void printList() {
@@ -104,7 +126,11 @@ int main()
     list.deleteFront();
     list.deleteFront();
 
-    list.find(420);
+    Node* foundNode = list.find(420);
+    if (foundNode != nullptr) {
+        list.insertAfter(foundNode, 69);
+        list.insertAfter(foundNode, 69);
+    }
 
     list.deleteEnd();
 
