@@ -81,12 +81,55 @@ public:
     }
 
     // find by address
+    Node* findByAddress(Node* address) {
+        Node* current = head;
+        while(current != nullptr) {
+            if (current == address) {
+                return current;
+            } else {
+                current = current->next;
+            }
+        }
+        return nullptr;
+    }
 
     // find by value
+    Node* findByValue(int value) {
+        Node* current = head;
+        while(current != nullptr) {
+            if (current->data == value) {
+                return current;
+            } else {
+                current = current->next;
+            }
+        }
+        return nullptr;
+    }
 
-    // insert by address
+    // insert after address
+    void insertAfter(Node* address, int value) {
+        Node* newNode = new Node(value);
+        Node* current = head;
+        bool found = false;
+        while(current != nullptr) {
+            if (current == address) {
+                newNode->next = current->next;
+                newNode->prev = current;
+                current->next->prev = newNode;
+                current->next = newNode;
+                found = true;
+                return;
+            } else {
+                current = current->next;
+                found = false;
+            }
+        }
+        if (found == false) {
+            cout << "Couldn't find Node: " << address << endl;
+        }
+    }
 
-    // insert by value (could be used for sorting)
+    // insert after value (could be used for sorting)
 
     // delete by address
 
@@ -121,13 +164,20 @@ int main() {
     linkedList->addHead(3);
 
     linkedList->addTail(4);
+    linkedList->addTail(420);
     linkedList->addTail(5);
     linkedList->addTail(6);
+    linkedList->addTail(7);
 
     cout << endl;
 
     linkedList->deleteHead();
     linkedList->deleteTail();
+
+    Node* foundNodeAddress = linkedList->findByValue(420);
+    
+    linkedList->printList();
+    linkedList->insertAfter(foundNodeAddress, 69);
 
     linkedList->printList();
     delete linkedList;
