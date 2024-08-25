@@ -110,30 +110,88 @@ public:
     void insertAfter(Node* address, int value) {
         Node* newNode = new Node(value);
         Node* current = head;
-        bool found = false;
         while(current != nullptr) {
             if (current == address) {
                 newNode->next = current->next;
                 newNode->prev = current;
                 current->next->prev = newNode;
                 current->next = newNode;
-                found = true;
                 return;
             } else {
                 current = current->next;
-                found = false;
             }
         }
-        if (found == false) {
-            cout << "Couldn't find Node: " << address << endl;
-        }
+        cout << "Couldn't find Node: " << address << endl;
     }
 
     // insert after value (could be used for sorting)
+    void insertAfterValue(int valueAfter, int value) {
+        Node* newNode = new Node(value);
+        Node* current = head;
+
+        while(current != nullptr) {
+            if (current->data == valueAfter) {
+                newNode->next = current->next;
+                newNode->prev = current;
+                current->next->prev = newNode;
+                current->next = newNode;
+                return;
+            } else {
+                current = current->next;
+            }
+        }
+        cout << "Couldn't find Node with value: " << valueAfter << endl;
+    }
 
     // delete by address
+    void deleteByAddress(Node* address) {
+        Node* current = head;
+        while (current != nullptr) {
+            if (current == address) {
+                if (current->prev != nullptr) {
+                    current->prev->next = current->next;
+                } else {  // If not, update the head
+                    head = current->next;
+                }
+
+                if (current->next != nullptr) { 
+                    current->next->prev = current->prev;
+                } else {
+                    tail = current->prev;
+                }
+
+                delete current;
+                return;
+            }
+            current = current->next;
+        }
+        cout << "Couldn't find Node: " << address << endl;
+    }
 
     // delete by value
+    void deleteByValue(int value) {
+        Node* current = head;
+        while (current != nullptr) {
+            if (current->data == value) {
+                if (current->prev != nullptr) {
+                    current->prev->next = current->next;
+                } else { 
+                    head = current->next;
+                }
+
+                if (current->next != nullptr) { 
+                    current->next->prev = current->prev;
+                } else {
+                    tail = current->prev;
+                }
+
+                delete current;
+                return;
+            }
+            current = current->next;
+        }
+        cout << "Couldn't find Node with value: " << value << endl;
+    }
 
     // print list
     void printList() {
@@ -178,6 +236,15 @@ int main() {
     
     linkedList->printList();
     linkedList->insertAfter(foundNodeAddress, 69);
+
+    linkedList->printList();
+    linkedList->insertAfterValue(69, 690);
+
+    linkedList->printList();
+    linkedList->deleteByAddress(foundNodeAddress);
+
+    linkedList->printList();
+    linkedList->deleteByValue(6);
 
     linkedList->printList();
     delete linkedList;
