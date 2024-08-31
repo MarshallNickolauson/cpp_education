@@ -61,6 +61,40 @@ int main() {
     cout << "Searching for Andy Smith (ID: 1): " << (hashTable.search("Andy", "Smith", 1) ? "Found" : "Not Found") << endl;
     cout << "Searching for Andy Johnson (ID: 2): " << (hashTable.search("Andy", "Johnson", 2) ? "Found" : "Not Found") << endl;
     cout << "Searching for Charlie Brown (ID: 4): " << (hashTable.search("Charlie", "Brown", 4) ? "Found" : "Not Found") << endl;
+
+    /* 
+
+    A: Andy Smith (ID: 1) -> Andy Johnson (ID: 2) -> nullptr
+    B: Bob Brown (ID: 3) -> nullptr
+    C: nullptr
+    D: nullptr
+    E: nullptr
+    F: nullptr
+    G: nullptr
+    H: nullptr
+    I: nullptr
+    J: nullptr
+    K: nullptr
+    L: nullptr
+    M: nullptr
+    N: nullptr
+    O: nullptr
+    P: nullptr
+    Q: nullptr
+    R: nullptr
+    S: nullptr
+    T: nullptr
+    U: nullptr
+    V: nullptr
+    W: nullptr
+    X: nullptr
+    Y: nullptr
+    Z: nullptr
+    Searching for Andy Smith (ID: 1): Found
+    Searching for Andy Johnson (ID: 2): Found
+    Searching for Charlie Brown (ID: 4): Not Found
+    
+    */
     
     return 0;
 }
