@@ -19,7 +19,6 @@ public:
 
     bool insert(int key) {
         if (size == capacity) {
-            cout << "Hash table is Full" << endl;
             return false;
         }
 
@@ -29,7 +28,6 @@ public:
         while (table[hashIndex] != -1) {
             hashIndex = (hashIndex + 1) % capacity;
             if (hashIndex == startIndex) {
-                cout << "Hash table is full" << endl;
                 return false; 
             }
         }
@@ -61,7 +59,6 @@ public:
     bool remove(int key) {
         int hashIndex = search(key);
         if (hashIndex == -1) {
-            cout << "Key not found" << endl;
             return false;
         }
 
