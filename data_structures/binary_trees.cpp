@@ -119,6 +119,7 @@ int main() {
     binaryTree->insert(18, "Ethan");
     binaryTree->insert(11, "Sophia");
     binaryTree->insert(2, "James");
+    binaryTree->insert(2, "Jain"); // changes node 2 value to be Jane (no duplicates)
 
     binaryTree->print();
 
