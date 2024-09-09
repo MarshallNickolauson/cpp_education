@@ -64,6 +64,22 @@ private:
         }
     }
 
+    void findMinimum(Node* current) {
+        if (current->getLeft() != nullptr) {
+            findMinimum(current->getLeft());
+        } else {
+            cout << "Minimum node is " << current->key << ": " << current->getValue() << endl;
+        }
+    }
+
+    void findMaximum(Node* current) {
+        if (current->getRight() != nullptr) {
+            findMaximum(current->getRight());
+        } else {
+            cout << "Maximum node is " << current->key << ": " << current->getValue() << endl;
+        }
+    }
+
     void printTree(Node* node, const string& prefix = "", bool isLeft = true) {
         if (node != nullptr) {
             // Use prefix and branch characters to represent structure
@@ -97,6 +113,22 @@ public:
         }
     }
 
+    void findMinimum() {
+        if (root == nullptr) {
+            cout << "Tree is empty" << endl;
+        } else {
+            findMinimum(root);
+        }
+    }
+
+    void findMaximum() {
+        if (root == nullptr) {
+            cout << "Tree is empty" << endl;
+        } else {
+            findMaximum(root);
+        }
+    }
+
     void print() {
         printTree(root);
     }
@@ -122,6 +154,10 @@ int main() {
     binaryTree->insert(2, "Jain"); // changes node 2 value to be Jane (no duplicates)
 
     binaryTree->print();
+    cout << endl;
+
+    binaryTree->findMinimum();
+    binaryTree->findMaximum();
 
     delete binaryTree;
     return 0;
