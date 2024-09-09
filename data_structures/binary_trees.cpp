@@ -114,17 +114,13 @@ public:
     }
 
     void findMinimum() {
-        if (root == nullptr) {
-            cout << "Tree is empty" << endl;
-        } else {
+        if (root != nullptr) {
             findMinimum(root);
         }
     }
 
     void findMaximum() {
-        if (root == nullptr) {
-            cout << "Tree is empty" << endl;
-        } else {
+        if (root != nullptr) {
             findMaximum(root);
         }
     }
