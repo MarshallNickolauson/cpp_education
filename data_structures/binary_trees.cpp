@@ -2,6 +2,7 @@
 #include <vector>
 #include <string>
 #include <cmath>
+#include <queue>
 
 using namespace std;
 
@@ -82,16 +83,9 @@ private:
 
     void printTree(Node* node, const string& prefix = "", bool isLeft = true) {
         if (node != nullptr) {
-            // Use prefix and branch characters to represent structure
             cout << prefix;
-
-            // Print whether this is a left node or right node
             cout << (isLeft ? "L-- " : "R-- ");
-
-            // Print the current node key and value
             cout << "Node: " << node->key << " -> " << node->getValue() << endl;
-
-            // Recursively print left and right children
             string newPrefix = prefix + (isLeft ? "|   " : "    ");
             printTree(node->getLeft(), newPrefix, true);
             printTree(node->getRight(), newPrefix, false);
@@ -128,6 +122,24 @@ public:
     void print() {
         printTree(root);
     }
+
+    void breadthFirstSearch() {
+        if (root != nullptr) {
+            std::queue<Node*> q;
+            q.push(root);
+            while (!q.empty()) {
+                int level = q.size();
+                for (int i = 0; i < level; i++) {
+                    Node* node = q.front();
+                    std::cout << node->key << " ";
+                    q.pop();
+                    if (node->getLeft() != nullptr) q.push(node->getLeft());
+                    if (node->getRight() != nullptr) q.push(node->getRight());
+                }
+                cout << endl;
+            }
+        }
+    }
 };
 
 int main() {
@@ -154,6 +166,9 @@ int main() {
 
     binaryTree->findMinimum();
     binaryTree->findMaximum();
+    cout << endl;
+
+    binaryTree->breadthFirstSearch();
 
     delete binaryTree;
     return 0;
