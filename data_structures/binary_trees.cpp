@@ -3,6 +3,7 @@
 #include <string>
 #include <cmath>
 #include <queue>
+#include <stack>
 
 using namespace std;
 
@@ -152,6 +153,20 @@ public:
             }
         }
     }
+
+    void depthFirstSearch() {
+        if (root != nullptr) {
+            std::stack<Node*> s;
+            s.push(root);
+            while(!s.empty()) {
+                Node* node = s.top();
+                s.pop();
+                std::cout << node->key << " ";
+                if (node->getRight() != nullptr) s.push(node->getRight());
+                if (node->getLeft() != nullptr) s.push(node->getLeft());
+            }
+        }
+    }
 };
 
 int main() {
@@ -181,6 +196,10 @@ int main() {
     cout << endl;
 
     binaryTree->breadthFirstSearch();
+    cout << endl;
+
+    binaryTree->depthFirstSearch();
+    cout << endl;
     cout << endl;
 
     delete binaryTree;
