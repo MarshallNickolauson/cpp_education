@@ -95,7 +95,19 @@ public:
     BinaryTree() : root(nullptr) {}
 
     ~BinaryTree() {
-        // traverse the entire thing and delete all nodes
+        if (root != nullptr) {
+            std::queue<Node*> q;
+            q.push(root);
+            while (!q.empty()) {
+                Node* node = q.front();
+                int tempInt = node->key;
+                delete node;
+                std::cout << "Deleted node: " << tempInt << endl;
+                q.pop();
+                if (node->getLeft() != nullptr) q.push(node->getLeft());
+                if (node->getRight() != nullptr) q.push(node->getRight());
+            }
+        }
     }
 
     void insert(int key, string value) {
@@ -169,6 +181,7 @@ int main() {
     cout << endl;
 
     binaryTree->breadthFirstSearch();
+    cout << endl;
 
     delete binaryTree;
     return 0;
